@@ -1,0 +1,123 @@
+/* Reset básico para eliminar márgenes y padding predeterminados */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+/* Estilos generales del cuerpo */
+body {
+    font-family: 'Arial', sans-serif;
+    line-height: 1.6;
+    background-color: #f5f5f5; /* Fondo neutro */
+    color: #2c3e50; /* Texto principal en gris oscuro */
+}
+
+/* Encabezado */
+header {
+    background-color: #3b5998; /* Azul principal */
+    color: #ffffff; /* Texto en blanco */
+    padding: 20px 0;
+    text-align: center;
+}
+
+header h1 {
+    margin-bottom: 10px;
+    font-size: 2.5em;
+}
+
+nav ul {
+    list-style: none;
+}
+
+nav ul li {
+    display: inline;
+    margin: 0 15px;
+}
+
+nav ul li a {
+    color: #ffe6f0; /* Rosado claro para los enlaces */
+    text-decoration: none;
+    font-weight: bold;
+}
+
+nav ul li a:hover {
+    color: #e91e63; /* Rosado vibrante al pasar el cursor */
+}
+
+/* Secciones */
+section {
+    padding: 40px 20px;
+    background-color: #ffffff; /* Fondo blanco para secciones */
+    margin: 20px auto;
+    max-width: 1000px;
+    border-radius: 8px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+}
+
+section:nth-of-type(even) {
+    background-color: #ffe6f0; /* Rosado claro para secciones pares */
+}
+
+section h2 {
+    color: #3b5998; /* Azul principal para los títulos */
+    margin-bottom: 20px;
+    border-bottom: 2px solid #e91e63; /* Línea rosada debajo del título */
+    padding-bottom: 10px;
+}
+
+section p, section li, section blockquote {
+    color: #2c3e50; /* Texto en gris oscuro */
+    margin-bottom: 15px;
+}
+
+/* Listas */
+ul {
+    list-style-type: disc;
+    margin-left: 20px;
+}
+
+strong {
+    color: #e91e63; /* Rosado vibrante para texto destacado */
+}
+
+/* Multimedia */
+figure {
+    text-align: center;
+    margin: 20px 0;
+}
+
+figure img {
+    max-width: 100%;
+    height: auto;
+    border-radius: 8px;
+}
+
+figcaption {
+    margin-top: 10px;
+    color: #7f8c8d; /* Gris medio para el pie de foto */
+    font-style: italic;
+}
+
+/* Video */
+video {
+    display: block;
+    margin: 20px auto;
+    border: 2px solid #3b5998; /* Borde azul alrededor del video */
+    border-radius: 8px;
+}
+
+/* Pie de página */
+footer {
+    background-color: #3b5998; /* Azul principal */
+    color: #ffffff; /* Texto en blanco */
+    text-align: center;
+    padding: 15px 0;
+    position: fixed;
+    width: 100%;
+    bottom: 0;
+}
+
+footer p {
+    margin: 0;
+}
