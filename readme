@@ -1,0 +1,31 @@
+# Proyecto MUJERES LIDERES
+
+## ACT 2 DISEÑO WEB CON HTML Y CSS
+
+Nuestro proyecto se basará en crear una página web sobre las MUJERES LIDERES, es un movimiento en donde a través de la página se mostrarán toda su información. En esta actividad empezaremos creando el diseño web con html y css. posteriormente en las demás actividades se le irán agregando mejoras segun lo solicitado
+
+## Instalación
+
+1. **Clona el repositorio**:
+
+    Abre el terminal de visual studio code y copia el siguiente comando:
+
+    git clone https://github.com/rhonnyjaimes/Pagina-Mujeres-Libres
+   
+2. **Abrir la página a través de un navegador**:
+
+    Seleccionar cualquier vista html, tiene nombre de mujeres_libres_1.html o mujeres_libres_2.html
+
+## Funcionamiento del Programa
+
+El programa se ejecutá en unas vistas de html a través de un navegador.
+
+## Vistas Creadas
+
+-mujeres libres 1: Vista principal que muestra la historia de mujeres libres, logros notables, recursos multimedia que representan sus luchas a lo largo de la historia.
+-mujeres libres 2: Vista secundaria que muestra el impacto social y el futuro que tiene el movimiento de las mujeres libres. 
+
+Derechos Reservados
+© 2024 Rhonny Andres Jaimes Gonzalez C.I. 29.718.095
+© 2024 Miguel Alfonso Suarez Valero  C.I. 28.206.469
+© 2024 Ricardo Loaiza C.I. 28.322.840
