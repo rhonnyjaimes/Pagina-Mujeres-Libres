@@ -1,5 +1,87 @@
 @import url("https://fonts.googleapis.com/css2?family=DM+Sans:ital,opsz,wght@0,9..40,100..1000;1,9..40,100..1000&family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap");
 
+.section__container,
+.feature__content,
+.feature__grid,
+.feature__card,
+.header__content,
+.footer__container {
+  text-align: center;
+}
+
+/* Alineación centrada para los botones */
+.btn {
+  margin: 1rem auto; /* Alinea el botón al centro */
+  display: inline-flex; /* Mantiene el texto y los íconos alineados horizontalmente */
+  justify-content: center;
+  align-items: center;
+}
+
+/* Encabezado centrado */
+.header__content h1,
+.header__content p {
+  text-align: center;
+  margin: 0 auto;
+}
+
+.header__btns {
+  display: flex;
+  justify-content: center; /* Centra los botones del encabezado */
+}
+
+.header__image {
+  display: flex;
+  justify-content: center; /* Centra la imagen del encabezado */
+  margin-top: 1.5rem;
+}
+
+/* Centrado para las tarjetas de características */
+.feature__grid {
+  display: flex;
+  justify-content: center; /* Centra las tarjetas */
+  gap: 2rem;
+  flex-wrap: wrap; /* Permite que las tarjetas se ajusten en pantallas más pequeñas */
+}
+
+.feature__card {
+  max-width: 300px; /* Limita el ancho de las tarjetas */
+  text-align: center;
+}
+
+/* Centrado para el footer */
+.footer__container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.footer__col {
+  margin-bottom: 2rem;
+  text-align: center;
+}
+
+/* Mantener la misma alineación en los inputs del footer */
+form {
+  display: flex;
+  justify-content: center;
+  gap: 0.5rem;
+}
+
+input[type="email"] {
+  padding: 0.5rem;
+  border-radius: 0.5rem;
+  border: 1px solid var(--primary-color-dark);
+  font-size: 1rem;
+}
+
+button.btn {
+  margin-left: 0;
+  font-size: 1rem;
+}
+
+
+
+
 /* Reset básico para eliminar márgenes y padding predeterminados */
 :root {
   --primary-color: #F386A5;
