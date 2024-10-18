@@ -63,23 +63,23 @@ ScrollReveal().reveal(".banner__card", {
   interval: 500,
 });
 
-ScrollReveal().reveal(".specs__card", {
+ScrollReveal().reveal(".imgap__card", {
   duration: 1000,
   interval: 500,
 });
 
-ScrollReveal().reveal(".product__content img", {
+ScrollReveal().reveal(".feminismo__content img", {
   ...scrollRevealOption,
 });
-ScrollReveal().reveal(".product__content p", {
+ScrollReveal().reveal(".feminismo__content p", {
   ...scrollRevealOption,
   delay: 500,
 });
-ScrollReveal().reveal(".product__btn", {
+ScrollReveal().reveal(".feminismo__btn", {
   ...scrollRevealOption,
   delay: 1000,
 });
-ScrollReveal().reveal(".product__list li", {
+ScrollReveal().reveal(".feminismo__list li", {
   duration: 1000,
   interval: 500,
   delay: 1500,
