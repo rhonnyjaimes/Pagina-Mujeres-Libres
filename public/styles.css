@@ -9,6 +9,8 @@
   text-align: center;
 }
 
+
+
 /* Alineación centrada para los botones */
 .btn {
   margin: 1rem auto; /* Alinea el botón al centro */
@@ -232,7 +234,7 @@ nav {
 }
 
 .nav__links.open {
-  transform: translateY(100%);
+  transform: translateY(0%);
 }
 
 .nav__links a {
@@ -634,6 +636,7 @@ nav {
     font-size: 1.5rem;
   }
 
+  
   .nav__menu__btn {
     display: none;
   }
@@ -710,5 +713,189 @@ nav {
 
   .feminismo__list {
     gap: 2rem;
+  }
+}
+/* Estilos generales para pantallas pequeñas (móviles) */
+@media (max-width: 600px) {
+  .section__header {
+    font-size: 2.5rem;
+    line-height: 3rem;
+  }
+
+  
+    #menu-btn {
+      display: block;
+    }
+  
+    #nav-links {
+      position: fixed;
+      top: 60px;
+      left: 50%;
+      width: 50%;
+    }
+    
+    /* Alinea los enlaces del menú en vertical en la vista móvil */
+    #nav-links li {
+      display: block;
+      margin: 3px 0;
+    }
+  }
+  .feminismo__list li {
+    position: relative;
+    isolation: isolate;
+    width: 100%;
+    padding: 3rem;
+    font-size: 1.1rem;
+    font-weight: 600;
+    color: var(--text-dark);
+    background-color: var(--extra-light);
+    border-radius: 1rem;
+    box-shadow: 5px 5px 20px rgba(0, 0, 0, 0.05);
+    transition: 0.3s;
+  }
+  .feature__card {
+    max-width: 100%; /* Aumenta el ancho de las tarjetas en pantallas pequeñas */
+  }
+
+  .header__content h1 {
+    font-size: 3rem;
+    line-height: 3.5rem;
+  }
+
+  .header__content p {
+    font-size: 1rem;
+    text-align: justify
+  }
+
+  .btn {
+    font-size: 0.875rem;
+    padding: 0.5rem 1rem;
+  }
+
+ 
+
+  .header__image {
+    width: 100%;
+  }
+
+
+
+.nav__menu__btn {
+  display: block; /* Mostrar en móviles */
+}
+
+
+.nav__links.open {
+  display: block;
+  max-height: 300px; /* Ajustar el tamaño máximo según el contenido */
+}
+
+.nav__links li {
+  padding: 15px;
+
+}
+
+
+
+.nav__links.open {
+  display: flex; /* Mostrar menú cuando esté activo */
+}
+
+/* Estilos para tablets (pantallas medianas) */
+@media (min-width: 601px) and (max-width: 1024px) {
+  .section__header {
+    font-size: 3rem;
+    line-height: 3.5rem;
+  }
+
+  .feature__card {
+    max-width: 100%; 
+  }
+
+  .header__content h1 {
+    font-size: 3.5rem;
+    line-height: 4.5rem;
+    text-align: center;
+  }
+
+  .header__content p {
+    font-size: 1.1rem;
+    text-align: justify;
+  }
+
+  .header__btns {
+    flex-direction: column; /* Apila los botones en pantallas medianas */
+  }
+
+  .btn {
+    padding: 0.75rem 1.25rem;
+  }
+}
+
+.feminismo__list li {
+  position: relative;
+  isolation: isolate;
+  width: 100%;
+  padding: 3rem;
+  font-size: 1.25rem;
+  font-weight: 600;
+  color: var(--text-dark);
+  background-color: var(--extra-light);
+  border-radius: 1rem;
+  box-shadow: 5px 5px 20px rgba(0, 0, 0, 0.05);
+  transition: 0.3s;
+}
+
+/* Estilos para pantallas grandes */
+@media (min-width: 1025px) {
+  .section__header {
+    font-size: 3.5rem;
+  }
+
+  .feature__card {
+    max-width: 300px; /* Mantiene el tamaño original de las tarjetas en pantallas grandes */
+  }
+
+  .header__content h1 {
+    font-size: 5.5rem;
+  }
+
+  .header__btns {
+    flex-direction: row; /* Mantiene los botones en fila en pantallas grandes */
+  }
+}
+@media (max-width: 768px) {
+  .nav__menu__btn {
+    display: block; /* Mostrar el botón de hamburguesa */
+  }
+
+  .nav__links {
+    display: none; /* Ocultar menú inicialmente */
+    flex-direction: column;
+    position: absolute;
+    width: 100%;
+    top: 4rem;
+    left: 0;
+    background-color: var(--primary-color);
+    z-index: 999;
+    padding: 1rem;
+  }
+
+  .nav__links.open {
+    display: flex; /* Mostrar menú cuando esté activo */
+  }
+
+  .nav__links li {
+    text-align: center;
+    padding: 1rem 0;
+  }
+
+  .btn {
+    background-color: var(--secondary-color);
+    color: white;
+    padding: 0.5rem 1rem;
+    text-align: center;
+    display: inline-block;
+    border-radius: 5px;
   }
 }
