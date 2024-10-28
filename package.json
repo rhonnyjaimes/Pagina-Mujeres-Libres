@@ -4,7 +4,9 @@
   "description": "Nuestro proyecto se basará en crear una página web sobre las MUJERES LIDERES, es un movimiento en donde a través de la página se mostrarán toda su información. En esta actividad empezaremos creando el diseño web con html y css. posteriormente en las demás actividades se le irán agregando mejoras segun lo solicitado",
   "main": "main.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "build": "webpack",
+    "watch": "webpack --watch"
+
   },
   "keywords": [],
   "author": "",
@@ -15,6 +17,9 @@
     "mysql": "^2.18.1"
   },
   "devDependencies": {
-    "nodemon": "^3.1.7"
+    "nodemon": "^3.1.7",
+    "webpack": "^5.95.0",
+    "webpack-cli": "^5.1.4",
+    "webpack-dev-server": "^5.1.0"
   }
 }
