@@ -1,0 +1,61 @@
+/* public/css/styles.css */
+body {
+    font-family: Arial, sans-serif;
+    color: #5c6bc0;
+    margin: 0;
+    padding: 0;
+    background-image: url("images/flores-manzanilla-sobre-fondo-rosa-fondo-margaritas-espacio-copia-fondo-verano_115594-2839.avif"); /* Reemplaza con la ruta de tu imagen */
+    background-position: center;
+    background-size: cover;
+    background-attachment: fixed; /* Mantiene la imagen fija al hacer scroll */
+}
+
+h1, h2 {
+    color: #ec407a;
+    text-align: center;
+}
+
+a {
+    color: #5c6bc0;
+    text-decoration: none;
+    font-weight: bold;
+}
+
+a:hover {
+    color: #ec407a;
+}
+
+#news-container {
+    width: 80%;
+    margin: 3rem auto;
+    padding: 20px;
+    background-color: #f8bbd0;
+    border-radius: 8px;
+    box-shadow: 5px 5px 20px rgba(0, 0, 0, 0.1); /* Ligero sombreado */
+}
+
+.news-item {
+    border-bottom: 1px solid #ec407a;
+    padding: 15px 0;
+}
+
+.news-item h2 {
+    color: #8e24aa;
+}
+
+.news-item p {
+    margin: 5px 0;
+}
+
+button {
+    background-color: #ec407a;
+    color: white;
+    padding: 10px 15px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+}
+
+button:hover {
+    background-color: #d81b60;
+}

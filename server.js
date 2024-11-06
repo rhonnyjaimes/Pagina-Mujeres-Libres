@@ -3,8 +3,13 @@ const express = require('express');
 const path = require('path');
 const bodyParser = require('body-parser');
 const authRoutes = require('./routes/authRoutes');
+const newsRoutes = require('./routes/newsRoutes');
+
 const app = express();
 const PORT = 3000;
+
+app.use('/', newsRoutes);
+
 
 // Middleware para procesar datos del formulario
 app.use(bodyParser.urlencoded({ extended: true }));
@@ -24,13 +29,6 @@ app.get('/mujeres_libres_2', (req, res) => {
     res.sendFile(path.join(__dirname, 'views', 'mujeres_libres_2.html'));
 });
 
-app.get('/mujeres_libres_3', (req, res) => {
-    res.sendFile(path.join(__dirname, 'mujeres_libres_3.html'));
-});
-
-app.get('/mujeres_libres_4', (req, res) => {
-    res.sendFile(path.join(__dirname, 'mujeres_libres_4.html'));
-});
 
 // Rutas de autenticación
 app.use('/', authRoutes);

@@ -1,0 +1,46 @@
+<!-- views/actualizar-noticia.html -->
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Actualizar Noticia</title>
+    <link rel="stylesheet" href="/css/styles.css">
+</head>
+<body>
+    <h1>Actualizar Noticia</h1>
+    <form action="" method="POST" enctype="multipart/form-data" id="update-form">
+        <label for="titulo">Título:</label><br>
+        <input type="text" name="titulo" id="titulo" required><br>
+
+        <label for="contenido">Contenido:</label><br>
+        <textarea name="contenido" id="contenido" required></textarea><br>
+
+        <label for="autor">Autor:</label><br>
+        <input type="text" name="autor" id="autor" required><br>
+
+        <label for="fecha">Fecha:</label><br>
+        <input type="date" name="fecha" id="fecha" required><br>
+
+        <label for="imagen">Imagen (opcional):</label><br>
+        <input type="file" name="imagen" id="imagen"><br><br>
+
+        <button type="submit">Actualizar Noticia</button>
+    </form>
+
+    <script>
+        const noticiaId = window.location.pathname.split("/").pop();
+
+        fetch(`/api/noticias/${noticiaId}`)
+            .then(response => response.json())
+            .then(data => {
+                document.getElementById("titulo").value = data.titulo;
+                document.getElementById("contenido").value = data.contenido;
+                document.getElementById("autor").value = data.autor;
+                document.getElementById("fecha").value = data.fecha;
+                document.getElementById("update-form").action = `/api/noticias/${noticiaId}`;
+            })
+            .catch(error => console.error("Error al cargar noticia:", error));
+    </script>
+</body>
+</html>

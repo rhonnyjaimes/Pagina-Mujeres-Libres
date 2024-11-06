@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Noticias</title>
+    <link rel="stylesheet" href="/noticias.css">
+</head>
+<body>
+    <div class="header">
+        <!-- Botón para agregar noticia, ubicado a la izquierda -->
+        <a href="/agregar-noticia" class="btn agregar">Agregar Noticia</a>
+    </div>
+
+    <h1>Noticias Recientes</h1>
+    <div id="news-container">
+        <!-- Aquí se insertarán los títulos de las noticias mediante JavaScript -->
+    </div>
+
+    <!-- Botón para ir al índice -->
+    <a href="/index" class="btn index">Ir al Índice</a>
+
+    <script>
+        // Obtener títulos de noticias usando fetch para la ruta API
+        fetch('/api/noticias')
+            .then(response => response.json())
+            .then(data => {
+                const container = document.getElementById('news-container');
+                if (data && data.length > 0) {
+                    data.forEach(noticia => {
+                        const noticiaElement = document.createElement('div');
+                        noticiaElement.innerHTML = `
+                            <div class="noticia">
+                                <h2>${noticia.titulo}</h2>
+                                <a href="/detalle-noticia?id=${noticia.id}" class="btn detalle">Ver Detalles</a>
+                                <button class="btn eliminar" onclick="eliminarNoticia(${noticia.id})">Eliminar</button>
+                            </div>
+                            <hr>
+                        `;
+                        container.appendChild(noticiaElement);  // Aquí se debe usar `container` en lugar de `r`
+                    });
+                } else {
+                    container.innerHTML = '<p>No hay noticias disponibles.</p>';
+                }
+            })
+            .catch(error => console.error('Error al cargar noticias:', error));
+
+        // Función para eliminar noticia
+        function eliminarNoticia(id) {
+            if (confirm('¿Estás seguro de que quieres eliminar esta noticia?')) {
+                fetch(`/api/noticias/${id}`, { method: 'DELETE' })
+                    .then(response => response.json())
+                    .then(data => {
+                        if (data.success) {
+                            alert('Noticia eliminada correctamente');
+                            location.reload(); // Recargar la página para reflejar los cambios
+                        } else {
+                            alert('Error al eliminar la noticia');
+                        }
+                    })
+                    .catch(error => console.error('Error al eliminar noticia:', error));
+            }
+        }
+    </script>
+</body>
+</html>
