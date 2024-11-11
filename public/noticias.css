@@ -1,19 +1,30 @@
 /* public/css/styles.css */
+@import url("https://fonts.googleapis.com/css2?family=DM+Sans:ital,opsz,wght@0,9..40,100..1000;1,9..40,100..1000&family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap");
+
 body {
-    font-family: Arial, sans-serif;
     color: #5c6bc0;
-    margin: 0;
-    padding: 0;
-    background-image: url("images/flores-manzanilla-sobre-fondo-rosa-fondo-margaritas-espacio-copia-fondo-verano_115594-2839.avif"); /* Reemplaza con la ruta de tu imagen */
+    background-image: url("https://images.pexels.com/photos/548389/pexels-photo-548389.jpeg"); /* Reemplaza con la ruta de tu imagen */
     background-position: center;
     background-size: cover;
     background-attachment: fixed; /* Mantiene la imagen fija al hacer scroll */
+    font-family: "Poppins", sans-serif;
+    
+    
 }
+
+* {
+    padding: 0;
+    margin: 0;
+    box-sizing: border-box;
+}
+
 
 h1, h2 {
     color: #ec407a;
     text-align: center;
 }
+
+
 
 a {
     color: #5c6bc0;
@@ -47,15 +58,152 @@ a:hover {
     margin: 5px 0;
 }
 
-button {
-    background-color: #ec407a;
-    color: white;
-    padding: 10px 15px;
+.btn{
+    margin: 1rem auto; /* Alinea el botón al centro */
+    display: inline-flex; /* Mantiene el texto y los íconos alineados horizontalmente */
+    justify-content: center;
+    align-items: center;
+    padding: 0.75rem 1.5rem;
+    outline: none;
     border: none;
-    border-radius: 5px;
+    align-items: center;
+    gap: 10px;
+    font-size: 1rem;
+    color: #000000;
+    white-space: nowrap;
+    background-color: #F386A5;
+    border-radius: 2rem;
+    transition: 0.3s;
     cursor: pointer;
+  
 }
 
 button:hover {
     background-color: #d81b60;
+}
+
+
+/* Formulario */
+
+.noticias-formulario {
+    width: 100%;
+    max-width: 600px;
+    background: rgba(255, 255, 255, 0.9);
+    padding: 40px;
+    border-radius: 20px;
+    box-shadow: 0 15px 35px rgba(0, 0, 0, 0.2);
+    backdrop-filter: blur(10px);
+    
+}
+
+
+
+.icono {
+    position: absolute; /* Posición absoluta del icono */
+    top: 10px; /* Espacio desde la parte superior */
+    left: 10px; /* Espacio desde la izquierda */
+    font-size: 24px; /* Tamaño del icono */
+    color: #d81b60; /* Color del icono */
+    text-decoration: none; /* Sin subrayado */
+}
+
+.icono:hover {
+    color: #00ff15; /* Color al pasar el mouse */
+}
+
+.form-header {
+    text-align: center;
+    margin-bottom: 30px;
+}
+
+.form-header h2 {
+    color: #F386A5;
+    font-size: 2em;
+    margin-bottom: 10px;
+}
+
+.form-header p {
+    color: #666;
+    font-size: 1.1em;
+}
+
+.form-grupo {
+    margin-bottom: 25px;
+    position: relative;
+}
+
+.form-grupo label {
+    display: block;
+    margin-bottom: 8px;
+    color: #F386A5;
+    font-weight: 500;
+}
+
+.input-group {
+    position: relative;
+}
+
+.input-group i {
+    position: absolute;
+    left: 15px;
+    top: 50%;
+    transform: translateY(-50%);
+    color: #F386A5;
+}
+
+.form-control {
+    width: 100%;
+    padding: 12px 15px 12px 45px;
+    border: 2px solid #ddd;
+    border-radius: 8px;
+    font-size: 1em;
+    transition: all 0.3s ease;
+    background: rgba(255, 255, 255, 0.9);
+}
+
+.form-control:focus {
+    border-color: #1e3c72;
+    box-shadow: 0 0 10px rgba(30, 60, 114, 0.2);
+    outline: none;
+}
+
+
+.submit-btn {
+    width: 100%;
+    padding: 15px;
+    background: #7ac232;
+    color: white;
+    border: none;
+    border-radius: 8px;
+    font-size: 1.1em;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    margin-top: 20px;
+}
+
+.submit-btn:hover {
+    background: #F386A5;
+    transform: translateY(-2px);
+}
+
+
+@keyframes shake {
+    0%, 100% { transform: translateX(0); }
+    25% { transform: translateX(-5px); }
+    75% { transform: translateX(5px); }
+}
+
+.shake {
+    animation: shake 0.4s ease-in-out;
+}
+
+@media (max-width: 480px) {
+    .noticias-formulario {
+        padding: 20px;
+    }
+
+    .form-header h2 {
+        font-size: 1.5em;
+    }
+
 }

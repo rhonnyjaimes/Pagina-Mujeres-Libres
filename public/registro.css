@@ -1,185 +1,117 @@
-/* Background styling */
+@import url("https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800;900&display=swap");
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  font-family: "Poppins", sans-serif;
+}
+    
 body {
-    background-image: url('/images/mujeresbanner.png');
-    background-size: cover;
-    background-position: center;
-    background-attachment: fixed;
-    font-family: 'Arial', sans-serif;
-    height: 100vh;
-    margin: 0;
-    display: flex;
-    justify-content: center;
-    align-items: center;
+      color: white;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      min-height: 100vh;
 }
 
-/* Container for the register form */
-.register-container {
-    background: rgba(255, 255, 255, 0.85); /* Slightly more opaque background */
-    padding: 2rem;
-    border-radius: 10px;
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-    text-align: center;
-    width: 400px;
-    max-width: 100%;
+.container {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 90%;
+  height: 600px;
+  border-radius: 10px;
+  background: url(images/Rally-for-Womens-Lives-April-9-1999-Washignton-DC.jpg);
+  background-repeat: no-repeat;
+  background-size: cover;
 }
 
-/* Form header */
-h1 {
-    font-size: 2.5rem;
-    margin-bottom: 1.5rem;
-    color: #333;
+.section1 {
+  width: 420px;
+  background-color:rgba(16 18 27 / 40%);
+  border: 2px solid rgba(255, 255, 255, 02);
+  backdrop-filter: blur(20px);
+  color: #fff;
+  border-radius: 10px;
+  padding: 30px 40px;
+}
+.section1 h1 {
+  font-size: 36px;
+  text-align: center;
+}
+.section1 .input-box {
+  position: relative;
+  width: 100%;
+  height: 50px;
+  margin: 15px 0;
+}
+.input-box input {
+  width: 100%;
+  height: 50px;
+  background: transparent;
+  border: none;
+  outline: none;
+  border: 2px solid rgba(255, 255, 255, .2);
+  border-radius: 40px;
+  font-size: 16px;
+  color: #fff;
+  padding: 20px 45px 20px 20px;
+}
+.input-box input::placeholder {
+  color: #fff;
+}
+.input-box i {
+  position:absolute;
+  right: 20px;
+  top: 50%;
+  transform: translateY(-50%);
+}
+.section1 .btn {
+  width: 100%;
+  height: 45px;
+  background-color: #fff;
+  border: none;
+  outline: none;
+  margin-top:20px;
+  border-radius: 40px;
+  box-shadow: 0 0 10px rgba(0, 0, 0, .1);
+  cursor: pointer;
+  font-size: 16px;
+  color: #333;
+  font-weight: 600;
+}
+.section1 .btn:hover{
+  background-color:#ff76ba;
+  color:#fff;
+}
+.section1 .registro-link {
+  font-size: 14.5px;
+  text-align: center;
+  margin: 20px 0 15px;
+}
+.registro-link p a {
+  color: #fff;
+  text-decoration: none;
+  font-weight: 600;
+}
+.registro-link p a:hover {
+  text-decoration: underline;
+}
+.section1 .registro-link a {
+  color: #fff;
+  font-size: 13px;
 }
 
-/* Input fields styling */
-.input-container {
-    margin: 1rem 0;
-    text-align: left;
+.icono {
+  position: absolute; /* Posición absoluta del icono */
+  top: 10px; /* Espacio desde la parte superior */
+  left: 10px; /* Espacio desde la izquierda */
+  font-size: 24px; /* Tamaño del icono */
+  color: #d81b60; /* Color del icono */
+  text-decoration: none; /* Sin subrayado */
 }
 
-label {
-    font-size: 1.1rem;
-    color: #333;
+.icono:hover {
+  color: #00ff15; /* Color al pasar el mouse */
 }
-
-input {
-    width: 100%;
-    padding: 0.8rem;
-    margin-top: 0.5rem;
-    border-radius: 5px;
-    border: 1px solid #ccc;
-    font-size: 1rem;
-}
-
-/* Password confirmation input */
-.password-confirmation-container {
-    margin-top: 1rem;
-}
-
-select {
-    width: 100%;
-    padding: 0.8rem;
-    margin-top: 0.5rem;
-    border-radius: 5px;
-    border: 1px solid #ccc;
-    font-size: 1rem;
-}
-
-/* Button styling */
-button {
-    padding: 0.8rem 1.5rem;
-    background-color: #4CAF50; /* Green for register button */
-    color: white;
-    border: none;
-    border-radius: 5px;
-    cursor: pointer;
-    font-size: 1.2rem;
-    transition: background-color 0.3s;
-    width: 100%;
-}
-
-button:hover {
-    background-color: #45A049;
-}
-
-/* Back button styling */
-.back-button {
-    margin-top: 1.5rem;
-}
-
-.back-button a {
-    display: inline-block;
-    padding: 0.8rem 1.5rem;
-    background-color: #4CAF50;
-    color: white;
-    border-radius: 5px;
-    text-decoration: none;
-    font-size: 1.2rem;
-    transition: background-color 0.3s;
-}
-
-.back-button a:hover {
-    background-color: #45A049;
-}
-
-/* Estilos generales para pantallas pequeñas (móviles) */
-@media (max-width: 600px) {
-    .section__header {
-      font-size: 2.5rem;
-      line-height: 3rem;
-    }
-  
-    .feature__card {
-      max-width: 100%; /* Aumenta el ancho de las tarjetas en pantallas pequeñas */
-    }
-  
-    .header__content h1 {
-      font-size: 3rem;
-      line-height: 3.5rem;
-    }
-  
-    .header__content p {
-      font-size: 1rem;
-    }
-  
-    .btn {
-      font-size: 0.875rem;
-      padding: 0.5rem 1rem;
-    }
-  
-    .feature__grid {
-      flex-direction: column; /* Apila las tarjetas verticalmente en pantallas pequeñas */
-    }
-  
-    .header__image {
-      width: 100%;
-    }
-  }
-  
-  /* Estilos para tablets (pantallas medianas) */
-  @media (min-width: 601px) and (max-width: 1024px) {
-    .section__header {
-      font-size: 3rem;
-      line-height: 3.5rem;
-    }
-  
-    .feature__card {
-      max-width: 45%; /* Permite dos tarjetas por fila en pantallas medianas */
-    }
-  
-    .header__content h1 {
-      font-size: 4rem;
-      line-height: 4.5rem;
-    }
-  
-    .header__content p {
-      font-size: 1.1rem;
-    }
-  
-    .header__btns {
-      flex-direction: column; /* Apila los botones en pantallas medianas */
-    }
-  
-    .btn {
-      padding: 0.75rem 1.25rem;
-    }
-  }
-  
-  /* Estilos para pantallas grandes */
-  @media (min-width: 1025px) {
-    .section__header {
-      font-size: 3.5rem;
-    }
-  
-    .feature__card {
-      max-width: 300px; /* Mantiene el tamaño original de las tarjetas en pantallas grandes */
-    }
-  
-    .header__content h1 {
-      font-size: 5.5rem;
-    }
-  
-    .header__btns {
-      flex-direction: row; /* Mantiene los botones en fila en pantallas grandes */
-    }
-  }
-  

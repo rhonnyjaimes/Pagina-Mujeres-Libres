@@ -4,28 +4,82 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Página sobre la importancia de las mujeres libres y empoderadas en la sociedad actual.">
+    <meta name="author" content="Equipo Mujeres Libres">
     <title>Agregar Noticia</title>
     <link rel="stylesheet" href="/noticias.css">
+    <link href="https://cdn.jsdelivr.net/npm/remixicon@4.3.0/fonts/remixicon.css" rel="stylesheet"/>
+    <link rel="icon" type="image/x-icon" href="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQc-DmshLNDlhgLf6xFk0AHOCZqrFXg8Qo3Jb_b4K8nHL_XukfKN-COdPBQxHKKmbulLo4&usqp=CAU">
+    <style>
+        body {
+            min-height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            padding: 20px;
+        }
+
+    </style>
 </head>
 <body>
-    <h1>Agregar Nueva Noticia</h1>
-    <form action="/api/noticias" method="POST" enctype="multipart/form-data">
-        <label for="titulo">Título:</label><br>
-        <input type="text" name="titulo" id="titulo" required><br>
+    <a href="/noticias" class="icono">
+        <i class="ri-arrow-left-line"></i>
 
-        <label for="contenido">Contenido:</label><br>
-        <textarea name="contenido" id="contenido" required></textarea><br>
+    </a>
 
-        <label for="autor">Autor:</label><br>
-        <input type="text" name="autor" id="autor" required><br>
+    <form action="/api/noticias" method="POST" enctype="multipart/form-data" class="noticias-formulario" id="noticiaForm">
+        <div class="form-header">
+            <h2>Agrega tu Noticia </h2>
+            <p>Introduce los Datos Correspondientes</p>
+        </div>
 
-        <label for="fecha">Fecha:</label><br>
-        <input type="date" name="fecha" id="fecha" required><br>
+        <div class="form-grupo">
+            <label for="titulo">Título:</label>
+            <div class="input-group">
+                <i class="ri-user-line"></i>
+                <input type="text" id="titulo" class="form-control" placeholder="Introduce el titulo del Articulo">
+            </div>
+        </div>
 
-        <label for="imagen">Imagen:</label><br>
-        <input type="file" name="imagen" id="imagen"><br><br>
+        <div class="form-grupo">
+            <label for="contenido">Contenido:</label>
+            <div class="input-group">
+                <i class="ri-chat-1-line"></i>
+                 <textarea id="contenido" class="form-control" placeholder="Explica tu Articulo" rows="4"></textarea>
+            </div>
+        </div>
 
-        <button type="submit">Agregar Noticia</button>
+        <div class="form-grupo">
+            <label for="titulo">Autor:</label>
+            <div class="input-group">
+                <i class="ri-pencil-line"></i>
+                <input type="text" id="autor" class="form-control" placeholder="Introduce tu nombre">
+            </div>
+        </div>
+
+        <div class="form-grupo">
+            <label for="date">Fecha:</label>
+            <div class="input-group">
+                <i class="ri-calendar-line"></i>
+                <input type="date" id="fecha" class="form-control" min="">
+            </div>
+        </div>
+
+        <div class="form-grupo">
+            <label for="imagen">Imagen:</label>
+            <div class="input-group">
+                <i class="ri-image-ai-line"></i>
+                <input type="file" id="imagen" class="form-control">
+            </div>
+        </div>
+
+        <button type="submit" class="submit-btn">
+            Publicar Noticia
+        </button>
     </form>
+
+    <script src="https://unpkg.com/scrollreveal"></script>
+    <script src="main.js"></script>
+
 </body>
 </html>
