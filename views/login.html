@@ -3,27 +3,54 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Página sobre la importancia de las mujeres libres y empoderadas en la sociedad actual.">
+    <meta name="author" content="Equipo Mujeres Libres">
     <title>Iniciar Sesión</title>
-    <link rel="stylesheet" href="login.css">
+    <link rel="stylesheet" href="registro.css">
+    <link href="https://cdn.jsdelivr.net/npm/remixicon@4.3.0/fonts/remixicon.css" rel="stylesheet"/>
+    <link rel="icon" type="image/x-icon" href="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQc-DmshLNDlhgLf6xFk0AHOCZqrFXg8Qo3Jb_b4K8nHL_XukfKN-COdPBQxHKKmbulLo4&usqp=CAU">
+
 </head>
 <body>
-    <div class="login-container">
-        <h1>Iniciar Sesión</h1>
+    <a href="/noticias" class="icono">
+        <i class="ri-arrow-left-line"></i>
+    </a>
+  
+
+    <div class="container">
+
+        <div class="section1">
+        
         <form action="/login" method="POST">
-            <div class="input-container">
-                <label for="username">Nombre de usuario:</label>
-                <input type="text" id="username" name="username" placeholder="Ingrese su nombre de usuario" required>
-            </div>
-            <div class="input-container">
-                <label for="password">Contraseña:</label>
-                <input type="password" id="password" name="password" placeholder="Ingrese su contraseña" required>
-            </div>
-            <button type="submit">Iniciar Sesión</button>
-        </form>
-        <!-- Botón para regresar a 'mujeres_libres_1' -->
-        <div class="back-button">
-            <a href="/mujeres_libres_1">Volver a Inicio</a>
+          <h1>Iniciar Sesión</h1>
+    
+          <div class="input-box">
+            <input type="text" placeholder="Nombre de usuario" required>
+            <i class='bx bxs-user'></i>
+          </div>
+          
+          <div class="input-box">
+            <input type="password" placeholder="Contraseña" required>
+            <i class='bx bxs-lock-alt'></i>
         </div>
-    </div>
+    
+        <button type="submit" class="btn">Iniciar Sesión</button>
+    
+        <div class="registro-link">
+          <a href="#">¿Olvidaste tu Contraseña?</a>
+        </div>
+    
+        <div class="registro-link">
+            <p>¿Eres nuevo en la página? <a href="/registro">Registrate</a></p>
+        </div>
+    
+        </form>
+    
+        </div>
+      </div>
+    
+    <script src="https://unpkg.com/scrollreveal"></script>
+    <script src="main.js"></script>
+
 </body>
 </html>
