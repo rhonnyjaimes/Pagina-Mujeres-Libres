@@ -29,6 +29,7 @@ app.use('/', authRoutes);
 // Rutas de contenido (incluyen las noticias)
 app.use('/', newsRoutes);
 
+
 // Rutas HTML específicas
 app.get('/mujeres_libres_1', (req, res) => {
     res.sendFile(path.join(__dirname, 'views', 'mujeres_libres_1.html'));

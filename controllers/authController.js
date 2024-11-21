@@ -65,9 +65,24 @@ exports.iniciarSesion = (req, res) => {
                 { expiresIn: '1h' } // Expira en 1 hora
             );
 
+            console.log('Token generado:', token); // Depuración: mostrar el token generado
+
+            // Verificar si el token tiene la estructura correcta
+            try {
+                const decodedToken = jwt.verify(token, process.env.JWT_SECRET);
+                console.log('Token decodificado correctamente:', decodedToken); // Depuración: mostrar el token decodificado
+            } catch (err) {
+                console.error('Error al decodificar el token:', err); // Error en la decodificación del token
+            }
+
             console.log('Inicio de sesión exitoso'); // Mensaje en consola
             res.cookie('token', token, { httpOnly: true }); // Almacenar el token en una cookie
-            res.json({ message: 'Inicio de sesión exitoso', token });
+            
+            // Depuración: verificar si la cookie se ha enviado
+            console.log('Cookie "token" enviada:', req.cookies.token);
+
+            // Redirigir a la página de inicio
+            return res.redirect('/index');  // Realizar la redirección antes de cualquier otra respuesta
         } else {
             console.warn('Usuario no encontrado'); // Advertencia en consola
             res.status(401).send('Usuario o contraseña incorrectos');

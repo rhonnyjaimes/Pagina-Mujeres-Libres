@@ -27,13 +27,10 @@
             </div>
         </div>
         <ul class="nav__links" id="nav-links">
-            <% if (usuario) { %>
-                <li><span>Bienvenido, <strong><%= usuario.username %></strong></span></li>
+               
                 <li><a href="/logout" class="btn">Cerrar Sesión</a></li>
-            <% } else { %>
                 <li><a href="/registro" class="btn">Registrarse</a></li>
                 <li><a href="/login" class="btn">Iniciar Sesión</a></li>
-            <% } %>
             <li><a href="/noticias" class="btn">Ver Noticias</a></li>
         </ul>
     </nav>
@@ -94,22 +91,18 @@
 </section>
 
 <div class="carruselImagen">
-  
       <img class="imageSlides" src="https://assets.editorial.aetnd.com/uploads/2019/02/topic-feminism-gettyimages-53375119-feature.jpg">
       <img class="imageSlides" src="https://media.newyorker.com/photos/5f15126000149b0e6409f92b/16:9/w_1280,c_limit/KYT-Combahee01.jpg">
       <img class="imageSlides" src="https://www.womenshistory.org/sites/default/files/styles/herospace_default/public/images/2022-12/NWRO_March_1.jpg?itok=S_MNNiSR">
       
-
-      <span id ="leftArrow" class="slideshowArrow">&#8249;</span>
-      <span id ="rightArrow" class="slideshowArrow">&#8250;</span>
+      <span id="leftArrow" class="slideshowArrow">&#8249;</span>
+      <span id="rightArrow" class="slideshowArrow">&#8250;</span>
       
       <div class="carruselFlechas">
-        
         <span class="circle dot"></span>
         <span class="circle"></span>
         <span class="circle"></span>
       </div>
-      
 </div>
 
 <footer class="footer" id="news">
