@@ -14,5 +14,6 @@ router.get('/login', authController.mostrarLogin);
 
 // Ruta para procesar el inicio de sesión
 router.post('/login', authController.iniciarSesion);
+router.get('/logout', authController.cerrarSesion); // Ruta para cerrar sesión
 
 module.exports = router;

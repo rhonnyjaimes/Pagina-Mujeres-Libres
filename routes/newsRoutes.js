@@ -3,12 +3,12 @@ const express = require('express');
 const router = express.Router();
 const newsController = require('../controllers/newsController');
 const path = require('path');
+const { verificarToken } = require('../middlewares/authMiddleware');
 
 // Rutas CRUD para noticias
-router.get('/noticias', (req, res) => {
+router.get('/noticias', verificarToken, (req, res) => {
     res.sendFile(path.join(__dirname, '../views', 'noticias.html'));
 });
-
 router.get('/agregar-noticia', (req, res) => {
     res.sendFile(path.join(__dirname, '../views', 'agregar-noticia.html'));
 });

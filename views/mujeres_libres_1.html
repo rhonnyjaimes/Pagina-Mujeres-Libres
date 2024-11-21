@@ -1,4 +1,3 @@
-<!DOCTYPE html>
 <html lang="es">
 <head>
     <meta charset="UTF-8">
@@ -28,9 +27,13 @@
             </div>
         </div>
         <ul class="nav__links" id="nav-links">
-            <li><a href="/mujeres_libres_2">Historia</a></li>
-            <li><a href="/registro" class="btn">Registrarse</a></li>
-            <li><a href="/login" class="btn">Iniciar Sesión</a></li>
+            <% if (usuario) { %>
+                <li><span>Bienvenido, <strong><%= usuario.username %></strong></span></li>
+                <li><a href="/logout" class="btn">Cerrar Sesión</a></li>
+            <% } else { %>
+                <li><a href="/registro" class="btn">Registrarse</a></li>
+                <li><a href="/login" class="btn">Iniciar Sesión</a></li>
+            <% } %>
             <li><a href="/noticias" class="btn">Ver Noticias</a></li>
         </ul>
     </nav>

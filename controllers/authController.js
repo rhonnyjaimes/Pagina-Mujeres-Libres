@@ -37,19 +37,24 @@ exports.mostrarLogin = (req, res) => {
 // Iniciar sesión
 exports.iniciarSesion = (req, res) => {
     const { username, password } = req.body;
+    console.log(`Intentando iniciar sesión para el usuario: ${username}`); // Registro en consola
+
     const sql = 'SELECT * FROM usuarios WHERE username = ?';
 
     conexion.query(sql, [username], async (err, results) => {
         if (err) {
+            console.error('Error al consultar la base de datos:', err); // Error en consola
             return res.status(500).send('Error al iniciar sesión');
         }
 
         if (results.length > 0) {
             const user = results[0];
+            console.log(`Usuario encontrado: ${JSON.stringify(user)}`); // Registro en consola
 
             // Verificar la contraseña encriptada
             const isMatch = await bcrypt.compare(password, user.password);
             if (!isMatch) {
+                console.warn('Contraseña incorrecta'); // Advertencia en consola
                 return res.status(401).send('Usuario o contraseña incorrectos');
             }
 
@@ -60,9 +65,18 @@ exports.iniciarSesion = (req, res) => {
                 { expiresIn: '1h' } // Expira en 1 hora
             );
 
+            console.log('Inicio de sesión exitoso'); // Mensaje en consola
+            res.cookie('token', token, { httpOnly: true }); // Almacenar el token en una cookie
             res.json({ message: 'Inicio de sesión exitoso', token });
         } else {
+            console.warn('Usuario no encontrado'); // Advertencia en consola
             res.status(401).send('Usuario o contraseña incorrectos');
         }
     });
+};
+
+exports.cerrarSesion = (req, res) => {
+    res.clearCookie('token'); // Eliminar la cookie del token
+    console.log('Sesión cerrada correctamente'); // Mensaje en consola
+    res.redirect('/registro'); // Redirigir a la página de registro o inicio
 };
