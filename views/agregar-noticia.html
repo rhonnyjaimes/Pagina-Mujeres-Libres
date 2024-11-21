@@ -29,55 +29,38 @@
 
     <form action="/api/noticias" method="POST" enctype="multipart/form-data" class="noticias-formulario" id="noticiaForm">
         <div class="form-header">
-            <h2>Agrega tu Noticia </h2>
+            <h2>Agrega tu Noticia</h2>
             <p>Introduce los Datos Correspondientes</p>
         </div>
-
+    
         <div class="form-grupo">
             <label for="titulo">Título:</label>
-            <div class="input-group">
-                <i class="ri-user-line"></i>
-                <input type="text" id="titulo" class="form-control" placeholder="Introduce el titulo del Articulo">
-            </div>
+            <input type="text" id="titulo" name="titulo" class="form-control" placeholder="Introduce el titulo del Articulo" required>
         </div>
-
+    
         <div class="form-grupo">
             <label for="contenido">Contenido:</label>
-            <div class="input-group">
-                <i class="ri-chat-1-line"></i>
-                 <textarea id="contenido" class="form-control" placeholder="Explica tu Articulo" rows="4"></textarea>
-            </div>
+            <textarea id="contenido" name="contenido" class="form-control" placeholder="Explica tu Articulo" rows="4" required></textarea>
         </div>
-
+    
         <div class="form-grupo">
-            <label for="titulo">Autor:</label>
-            <div class="input-group">
-                <i class="ri-pencil-line"></i>
-                <input type="text" id="autor" class="form-control" placeholder="Introduce tu nombre">
-            </div>
+            <label for="autor">Autor:</label>
+            <input type="text" id="autor" name="autor" class="form-control" placeholder="Introduce tu nombre" required>
         </div>
-
+    
         <div class="form-grupo">
-            <label for="date">Fecha:</label>
-            <div class="input-group">
-                <i class="ri-calendar-line"></i>
-                <input type="date" id="fecha" class="form-control" min="">
-            </div>
+            <label for="fecha">Fecha:</label>
+            <input type="date" id="fecha" name="fecha" class="form-control" required>
         </div>
-
+    
         <div class="form-grupo">
             <label for="imagen">Imagen:</label>
-            <div class="input-group">
-                <i class="ri-image-ai-line"></i>
-                <input type="file" id="imagen" class="form-control">
-            </div>
+            <input type="file" id="imagen" name="imagen" class="form-control">
         </div>
-
-        <button type="submit" class="submit-btn">
-            Publicar Noticia
-        </button>
+    
+        <button type="submit" class="submit-btn">Publicar Noticia</button>
     </form>
-
+    
     <script src="https://unpkg.com/scrollreveal"></script>
     <script src="main.js"></script>
 

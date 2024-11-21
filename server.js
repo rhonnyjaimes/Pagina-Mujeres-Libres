@@ -4,13 +4,14 @@ const path = require('path');
 const bodyParser = require('body-parser');
 const authRoutes = require('./routes/authRoutes');
 const newsRoutes = require('./routes/newsRoutes');
+const cookieParser = require('cookie-parser');
 
 const app = express();
 const PORT = 3000;
 
 app.use('/', newsRoutes);
 
-
+app.use(cookieParser());
 // Middleware para procesar datos del formulario
 app.use(bodyParser.urlencoded({ extended: true }));
 

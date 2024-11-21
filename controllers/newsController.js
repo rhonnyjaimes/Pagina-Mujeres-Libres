@@ -14,6 +14,7 @@ const storage = multer.diskStorage({
 });
 
 const upload = multer({ storage });
+module.exports.upload = upload;
 
 // Obtener todas las noticias
 exports.obtenerNoticias = (req, res) => {
@@ -43,24 +44,41 @@ exports.obtenerNoticiaPorId = (req, res) => {
 exports.crearNoticia = [
     upload.single('imagen'), // Usa multer para manejar la imagen
     (req, res) => {
+        // Verificar los datos recibidos
+        console.log('Datos recibidos en el body:', req.body);
+        console.log('Archivo recibido:', req.file);
+
+        // Desestructuramos los datos del cuerpo
         const { titulo, contenido, autor, fecha } = req.body;
         const imagen = req.file ? req.file.filename : null; // Guardar solo el nombre del archivo
+
+        // Validaciones básicas
+        if (!titulo || !contenido || !autor || !fecha) {
+            console.log('Faltan datos obligatorios');
+            return res.status(400).send('Faltan datos obligatorios');
+        }
+
+        console.log('Datos a insertar:', { titulo, contenido, autor, fecha, imagen });
 
         const sql = `
             INSERT INTO noticias (titulo, contenido, autor, fecha, imagen, creado_en, actualizado_en)
             VALUES (?, ?, ?, ?, ?, NOW(), NOW())
         `;
 
+        // Ejecutar la consulta SQL
         conexion.query(sql, [titulo, contenido, autor, fecha, imagen], (err, result) => {
             if (err) {
+                console.error('Error en la consulta SQL:', err);
                 return res.status(500).send('Error al crear la noticia');
             }
+
+            console.log('Noticia creada con éxito, ID:', result.insertId);
             // Redirige a la página de noticias después de la inserción exitosa
             res.redirect('/noticias');
-     
         });
     }
 ];
+
 
 // Actualizar una noticia
 exports.actualizarNoticia = [
