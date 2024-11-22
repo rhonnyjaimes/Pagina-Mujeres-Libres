@@ -53,7 +53,13 @@
         <img src="/images/fondo.jpg" alt="header"/>
     </div>
 </header>
-
+</header>
+<div class="noticias-destacadas">
+    <h2>Noticias Destacadas</h2>
+    <div id="noticias-recuadro">
+        <p>Cargando noticias...</p>
+    </div>
+</div>
 <section class="section__container feature__container" id="story">
     <div class="feature__content">
         <h3 class="section__subheader">Logros Notables</h3>
@@ -135,6 +141,46 @@
     </div>
 </footer>
 
+<script>
+    // Cargar y mostrar las noticias en la página principal
+    fetch('/api/noticias')
+        .then(response => response.json())
+        .then(noticias => {
+            const noticiasRecuadro = document.getElementById('noticias-recuadro');
+            noticiasRecuadro.innerHTML = ''; // Limpiar contenido previo
+
+            // Función para truncar el texto del contenido
+            const truncarTexto = (texto, limite) => {
+                if (texto.length > limite) {
+                    return texto.substring(0, limite) + '...';
+                }
+                return texto;
+            };
+
+            // Iterar sobre las noticias para crear tarjetas con detalles básicos
+            noticias.forEach(noticia => {
+                const noticiaCard = document.createElement('div');
+                noticiaCard.classList.add('noticia-card');
+
+                // Crear la estructura de la tarjeta
+                noticiaCard.innerHTML = `
+                    <img src="/uploads/${noticia.imagen || 'default.jpg'}" alt="Imagen de ${noticia.titulo}" class="noticia-imagen">
+                    <div class="noticia-info">
+                        <h3 class="noticia-titulo">${noticia.titulo}</h3>
+                        <p class="noticia-contenido">${truncarTexto(noticia.contenido || 'Sin descripción disponible.', 100)}</p>
+                        <a href="/detalle-noticia?id=${noticia.id}" class="noticia-detalles-link">Leer más</a>
+                    </div>
+                `;
+
+                // Agregar la tarjeta al recuadro de noticias
+                noticiasRecuadro.appendChild(noticiaCard);
+            });
+        })
+        .catch(error => {
+            console.error('Error al cargar las noticias:', error);
+            document.getElementById('noticias-recuadro').innerHTML = '<p>Error al cargar las noticias. Intente más tarde.</p>';
+        });
+</script>
 <script src="https://unpkg.com/scrollreveal"></script>
 <script src="main.js"></script>
 </body>
