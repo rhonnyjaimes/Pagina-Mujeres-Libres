@@ -23,6 +23,8 @@ npm install
 Instala MySQL (si no lo tienes instalado):
 Importa la estructura de la base de datos: En el repositorio se proporcionará un archivo .sql, impórtalo a tu base de datos utilizando la configuración de XAMPP para  MySQL:
 
+crear archivo .env y colocar lo siguiente: secret_key="tu_clave_secreta"
+
 4.	Abrir XAMPP y ejecutar APACHE y MYSQL.
 
 5.	Iniciar la aplicación:

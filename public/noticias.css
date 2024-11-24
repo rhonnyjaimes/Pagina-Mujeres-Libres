@@ -1,5 +1,82 @@
-/* public/css/styles.css */
 @import url("https://fonts.googleapis.com/css2?family=DM+Sans:ital,opsz,wght@0,9..40,100..1000;1,9..40,100..1000&family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap");
+
+.header {
+    background-color: #F8BBD0; /* Rosado pastel */
+    padding: 20px;
+    text-align: center;
+    color: #880E4F;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+    border-radius: 8px;
+}
+
+.header-title {
+    font-size: 2rem;
+    margin-bottom: 10px;
+    color: #AD1457; /* Rosado oscuro */
+}
+
+.header-nav .btn {
+    color: white;
+    background-color: #E91E63; /* Rosado vibrante */
+    padding: 10px 20px;
+    border-radius: 5px;
+    text-decoration: none;
+    font-weight: bold;
+    margin: 5px;
+}
+
+.header-nav .btn:hover {
+    background-color: #C2185B;
+}
+
+/* Noticias con miniaturas */
+.noticia {
+    display: flex;
+    align-items: center;
+    margin-bottom: 15px;
+    padding: 10px;
+    background-color: #FCE4EC; /* Fondo rosado claro */
+    border-radius: 8px;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+}
+
+.noticia img {
+    width: 100px;
+    height: 100px;
+    border-radius: 8px;
+    margin-right: 15px;
+    object-fit: cover;
+}
+
+.noticia h2 {
+    margin: 0;
+    font-size: 1.5rem;
+    color: #AD1457;
+}
+
+.noticia p {
+    margin: 5px 0;
+    color: #555;
+}
+
+.noticia-actions {
+    margin-left: auto;
+    display: flex;
+    gap: 10px;
+}
+
+.noticia-actions .btn {
+    background-color: #E91E63;
+    color: white;
+    padding: 5px 10px;
+    border-radius: 5px;
+    text-decoration: none;
+}
+
+.noticia-actions .btn:hover {
+    background-color: #C2185B;
+}
+
 
 body {
     color: #5c6bc0;

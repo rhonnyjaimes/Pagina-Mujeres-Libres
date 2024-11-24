@@ -11,22 +11,22 @@
     <link rel="icon" type="image/x-icon" href="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQc-DmshLNDlhgLf6xFk0AHOCZqrFXg8Qo3Jb_b4K8nHL_XukfKN-COdPBQxHKKmbulLo4&usqp=CAU">
 </head>
 <body>
-    
-    
+    <!-- Encabezado con color rosado -->
+    <header class="header">
+        <h1 class="header-title">Noticias Recientes</h1>
+        <nav class="header-nav">
+            <a href="/agregar-noticia" class="btn header-btn">Agregar Noticia</a>
+            <a href="/index" class="btn header-btn">Ir al Índice</a>
+        </nav>
+    </header>
 
-   <div class="header">
-        <a href="/agregar-noticia" class="btn">Agregar Noticia</a>
-        <a href="/index" class="btn">Ir al Índice</a>
-    </div> 
-    
-    <h1>Noticias Recientes</h1>
+    <!-- Contenedor de noticias -->
     <div id="news-container">
-        <!-- Aquí se insertarán los títulos de las noticias mediante JavaScript  -->
+        <!-- Las noticias se cargarán aquí mediante JavaScript -->
     </div>
-    
 
     <script>
-        // Obtener títulos de noticias usando fetch para la ruta API
+        // Fetch para cargar las noticias con miniaturas
         fetch('/api/noticias')
             .then(response => response.json())
             .then(data => {
@@ -34,15 +34,19 @@
                 if (data && data.length > 0) {
                     data.forEach(noticia => {
                         const noticiaElement = document.createElement('div');
+                        noticiaElement.className = 'noticia';
                         noticiaElement.innerHTML = `
-                            <div class="noticia">
+                            <img src="${noticia.miniatura || 'https://via.placeholder.com/100'}" alt="Miniatura de ${noticia.titulo}">
+                            <div>
                                 <h2>${noticia.titulo}</h2>
+                                <p>${noticia.descripcion || 'Sin descripción disponible.'}</p>
+                            </div>
+                            <div class="noticia-actions">
                                 <a href="/detalle-noticia?id=${noticia.id}" class="btn">Ver Detalles</a>
                                 <button class="btn" onclick="eliminarNoticia(${noticia.id})">Eliminar</button>
                             </div>
-                            <hr>
                         `;
-                        container.appendChild(noticiaElement);  // Aquí se debe usar `container` en lugar de `r`
+                        container.appendChild(noticiaElement);
                     });
                 } else {
                     container.innerHTML = '<p>No hay noticias disponibles.</p>';
@@ -50,7 +54,7 @@
             })
             .catch(error => console.error('Error al cargar noticias:', error));
 
-        // Función para eliminar noticia
+        // Función para eliminar noticias
         function eliminarNoticia(id) {
             if (confirm('¿Estás seguro de que quieres eliminar esta noticia?')) {
                 fetch(`/api/noticias/${id}`, { method: 'DELETE' })
@@ -58,7 +62,7 @@
                     .then(data => {
                         if (data.success) {
                             alert('Noticia eliminada correctamente');
-                            location.reload(); // Recargar la página para reflejar los cambios
+                            location.reload();
                         } else {
                             alert('Error al eliminar la noticia');
                         }
@@ -67,8 +71,5 @@
             }
         }
     </script>
-    
-    <script src="https://unpkg.com/scrollreveal"></script>
-    <script src="main.js"></script>
 </body>
 </html>
