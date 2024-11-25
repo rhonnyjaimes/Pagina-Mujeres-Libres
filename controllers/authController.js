@@ -20,12 +20,19 @@ exports.registrarUsuario = async (req, res) => {
 
         conexion.query(sql, [username, hashedPassword, rol], (err, result) => {
             if (err) {
-                return res.status(500).send('Error al registrar usuario');
+                console.error(err);
+                return res.status(500).render('error', { mensaje: 'Error al registrar el usuario. Inténtalo de nuevo.' });
             }
-            res.send('Usuario registrado correctamente');
+
+            // Redirigir con un mensaje de éxito
+            res.render('registroexitoso', {
+                mensaje: 'Usuario registrado correctamente. Redirigiendo al inicio de sesión...',
+                url: '/login'
+            });
         });
     } catch (error) {
-        res.status(500).send('Error al procesar la solicitud');
+        console.error(error);
+        res.status(500).render('error', { mensaje: 'Error al procesar la solicitud' });
     }
 };
 
@@ -37,25 +44,25 @@ exports.mostrarLogin = (req, res) => {
 // Iniciar sesión
 exports.iniciarSesion = (req, res) => {
     const { username, password } = req.body;
-    console.log(`Intentando iniciar sesión para el usuario: ${username}`); // Registro en consola
+    console.log(`Intentando iniciar sesión para el usuario: ${username}`);
 
     const sql = 'SELECT * FROM usuarios WHERE username = ?';
 
     conexion.query(sql, [username], async (err, results) => {
         if (err) {
-            console.error('Error al consultar la base de datos:', err); // Error en consola
-            return res.status(500).send('Error al iniciar sesión');
+            console.error('Error al consultar la base de datos:', err);
+            return res.status(500).render('error', { mensaje: 'Error al iniciar sesión' });
         }
 
         if (results.length > 0) {
             const user = results[0];
-            console.log(`Usuario encontrado: ${JSON.stringify(user)}`); // Registro en consola
+            console.log(`Usuario encontrado: ${JSON.stringify(user)}`);
 
             // Verificar la contraseña encriptada
             const isMatch = await bcrypt.compare(password, user.password);
             if (!isMatch) {
-                console.warn('Contraseña incorrecta'); // Advertencia en consola
-                return res.status(401).send('Usuario o contraseña incorrectos');
+                console.warn('Contraseña incorrecta');
+                return res.status(401).render('login', { mensaje: 'Usuario o contraseña incorrectos' });
             }
 
             // Crear un token JWT
@@ -65,33 +72,97 @@ exports.iniciarSesion = (req, res) => {
                 { expiresIn: '1h' } // Expira en 1 hora
             );
 
-            console.log('Token generado:', token); // Depuración: mostrar el token generado
+            console.log('Token generado:', token);
 
             // Verificar si el token tiene la estructura correcta
             try {
                 const decodedToken = jwt.verify(token, process.env.JWT_SECRET);
-                console.log('Token decodificado correctamente:', decodedToken); // Depuración: mostrar el token decodificado
+                console.log('Token decodificado correctamente:', decodedToken);
             } catch (err) {
-                console.error('Error al decodificar el token:', err); // Error en la decodificación del token
+                console.error('Error al decodificar el token:', err);
             }
 
-            console.log('Inicio de sesión exitoso'); // Mensaje en consola
-            res.cookie('token', token, { httpOnly: true }); // Almacenar el token en una cookie
-            
-            // Depuración: verificar si la cookie se ha enviado
-            console.log('Cookie "token" enviada:', req.cookies.token);
+            console.log('Inicio de sesión exitoso');
 
-            // Redirigir a la página de inicio
-            return res.redirect('/index');  // Realizar la redirección antes de cualquier otra respuesta
+            // Almacenar el token en una cookie
+            res.cookie('token', token, { httpOnly: true });
+
+            // Mostrar mensaje de bienvenida con el nombre de usuario y rol
+            return res.render('bienvenida', {
+                mensaje: `Bienvenido ${user.username}`,
+                rol: `Rol: ${user.rol}`,
+                url: '/index' // Redirigir a la página principal
+            });
         } else {
-            console.warn('Usuario no encontrado'); // Advertencia en consola
-            res.status(401).send('Usuario o contraseña incorrectos');
+            exports.iniciarSesion = (req, res) => {
+                const { username, password } = req.body;
+                console.log(`Intentando iniciar sesión para el usuario: ${username}`);
+            
+                const sql = 'SELECT * FROM usuarios WHERE username = ?';
+            
+                conexion.query(sql, [username], async (err, results) => {
+                    if (err) {
+                        console.error('Error al consultar la base de datos:', err);
+                        return res.status(500).render('error', { mensaje: 'Error al iniciar sesión' });
+                    }
+            
+                    if (results.length > 0) {
+                        const user = results[0];
+                        console.log(`Usuario encontrado: ${JSON.stringify(user)}`);
+            
+                        // Verificar la contraseña encriptada
+                        const isMatch = await bcrypt.compare(password, user.password);
+                        if (!isMatch) {
+                            console.warn('Contraseña incorrecta');
+                            return res.status(401).render('login', { mensaje: 'Usuario o contraseña incorrectos' });
+                        }
+            
+                        // Crear un token JWT
+                        const token = jwt.sign(
+                            { id: user.id, username: user.username, rol: user.rol },
+                            process.env.JWT_SECRET,
+                            { expiresIn: '1h' } // Expira en 1 hora
+                        );
+            
+                        console.log('Token generado:', token);
+            
+                        // Verificar si el token tiene la estructura correcta
+                        try {
+                            const decodedToken = jwt.verify(token, process.env.JWT_SECRET);
+                            console.log('Token decodificado correctamente:', decodedToken);
+                        } catch (err) {
+                            console.error('Error al decodificar el token:', err);
+                        }
+            
+                        console.log('Inicio de sesión exitoso');
+            
+                        // Almacenar el token en una cookie
+                        res.cookie('token', token, { httpOnly: true });
+            
+                        // Mostrar mensaje de bienvenida con el nombre de usuario y rol
+                        return res.render('bienvenida', {
+                            mensaje: `Bienvenido ${user.username}`,
+                            rol: `Rol: ${user.rol}`,
+                            url: '/index' // Redirigir a la página principal
+                        });
+                    } else {
+                        console.warn('Usuario no encontrado');
+                        res.status(401).render('login', { mensaje: 'Usuario o contraseña incorrectos' });
+                    }
+                });
+            };
+            
         }
     });
 };
 
+
+
 exports.cerrarSesion = (req, res) => {
+    const user = req.user; // Obtener el usuario de la sesión
     res.clearCookie('token'); // Eliminar la cookie del token
     console.log('Sesión cerrada correctamente'); // Mensaje en consola
-    res.redirect('/registro'); // Redirigir a la página de registro o inicio
+
+    // Renderizar la vista de cierre de sesión
+    res.render('cerrarSesion', { user: user });
 };

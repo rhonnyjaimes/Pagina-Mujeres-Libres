@@ -1,30 +1,50 @@
 // routes/newsRoutes.js
 const express = require('express');
+const conexion = require('../db');
+const path = require('path');
+
 const router = express.Router();
 const newsController = require('../controllers/newsController');
-const path = require('path');
-const { verificarToken } = require('../middlewares/authMiddleware');
-
-// Rutas CRUD para noticias
-router.get('/noticias', verificarToken, (req, res) => {
-    res.sendFile(path.join(__dirname, '../views', 'noticias.html'));
-});
-router.get('/agregar-noticia', (req, res) => {
-    res.sendFile(path.join(__dirname, '../views', 'agregar-noticia.html'));
-});
-
-router.post('/api/noticias', newsController.crearNoticia);
-
+const { verificarToken, requerirAdmin } = require('../middlewares/authMiddleware');
+// Ruta para ver el detalle de una noticia (requiere autenticación)
 router.get('/detalle-noticia', (req, res) => {
     res.sendFile(path.join(__dirname, '../views/detalle-noticia.html'));
 });
 
-router.get('/api/noticias/:id', newsController.obtenerNoticiaPorId);
+// Ruta para obtener todas las noticias (requiere autenticación)
+router.get('/noticias',  (req, res) => {
+    res.sendFile(path.join(__dirname, '../views', 'noticias.html'));
+});
 
-// Ruta para obtener las noticias en formato JSON (API)
-router.get('/api/noticias', newsController.obtenerNoticias);
-router.get('/noticias/:id', newsController.obtenerNoticiaPorId);
-router.put('/noticias/:id', newsController.actualizarNoticia);
-router.delete('/api/noticias/:id', newsController.eliminarNoticia);
+
+
+// Ruta para agregar una noticia (requiere autenticación)
+router.get('/agregar-noticia', verificarToken, requerirAdmin, (req, res) => {
+    res.sendFile(path.join(__dirname, '../views', 'agregar-noticia.html'));
+});
+
+// Ruta POST para crear una nueva noticia (requiere autenticación)
+router.post('/api/noticias',   newsController.crearNoticia);
+// routes/newsRoutes.js
+
+// Ruta para ver el detalle de una noticia (requiere autenticación)
+router.get('/detalle-noticia', verificarToken, (req, res) => {
+    res.sendFile(path.join(__dirname, '../views/detalle-noticia.html'));
+});
+
+// Ruta para obtener una noticia por ID (sin token requerido, para ser accesible sin autenticación)
+router.get('/api/noticias/:id',   newsController.obtenerNoticiaPorId);
+
+// Ruta para obtener todas las noticias en formato JSON (sin token requerido)
+router.get('/api/noticias',  newsController.obtenerNoticias);
+
+// Ruta para obtener una noticia específica por ID (requiere autenticación)
+router.get('/noticias/:id',  newsController.obtenerNoticiaPorId);
+
+// Ruta PUT para actualizar una noticia (requiere autenticación)
+router.put('/api/noticias/:id',  requerirAdmin, newsController.actualizarNoticia);
+
+// Ruta DELETE para eliminar una noticia (requiere autenticación)
+router.delete('/api/noticias/:id', verificarToken, requerirAdmin, newsController.eliminarNoticia);
 
 module.exports = router;

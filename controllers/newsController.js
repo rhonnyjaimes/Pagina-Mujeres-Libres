@@ -110,10 +110,21 @@ exports.actualizarNoticia = [
 exports.eliminarNoticia = (req, res) => {
     const { id } = req.params;
     const sql = 'DELETE FROM noticias WHERE id = ?';
+
     conexion.query(sql, [id], (err, result) => {
         if (err) {
-            return res.status(500).send('Error al eliminar la noticia');
+            console.error('Error al eliminar la noticia:', err);
+            return res.status(500).json({ success: false, message: 'Error al eliminar la noticia' });
         }
-        res.json({ message: 'Noticia eliminada correctamente' });
+
+        if (result.affectedRows === 0) {
+            // Si no se eliminó ninguna fila, el ID no existe
+            console.warn(`No se encontró la noticia con ID: ${id}`);
+            return res.status(404).json({ success: false, message: 'No se encontró la noticia a eliminar' });
+        }
+
+        console.log(`Noticia con ID ${id} eliminada correctamente`);
+        res.json({ success: true, message: 'Noticia eliminada correctamente' });
     });
 };
+

@@ -27,6 +27,7 @@
 
     <script>
         // Fetch para cargar las noticias con miniaturas
+        // Fetch para cargar las noticias con miniaturas
         fetch('/api/noticias')
             .then(response => response.json())
             .then(data => {
@@ -36,14 +37,14 @@
                         const noticiaElement = document.createElement('div');
                         noticiaElement.className = 'noticia';
                         noticiaElement.innerHTML = `
-                            <img src="${noticia.miniatura || 'https://via.placeholder.com/100'}" alt="Miniatura de ${noticia.titulo}">
+                            <img src="/uploads/${noticia.imagen || 'default.jpg'}" alt="Imagen de ${noticia.titulo}" class="noticia-imagen">
                             <div>
                                 <h2>${noticia.titulo}</h2>
-                                <p>${noticia.descripcion || 'Sin descripción disponible.'}</p>
+                                <p>${noticia.contenido.substring(0, 100)}...</p>
                             </div>
                             <div class="noticia-actions">
                                 <a href="/detalle-noticia?id=${noticia.id}" class="btn">Ver Detalles</a>
-                                <button class="btn" onclick="eliminarNoticia(${noticia.id})">Eliminar</button>
+                                <button class="btn btn-eliminar" onclick="eliminarNoticia(${noticia.id})">Eliminar</button>
                             </div>
                         `;
                         container.appendChild(noticiaElement);
@@ -55,21 +56,32 @@
             .catch(error => console.error('Error al cargar noticias:', error));
 
         // Función para eliminar noticias
-        function eliminarNoticia(id) {
-            if (confirm('¿Estás seguro de que quieres eliminar esta noticia?')) {
-                fetch(`/api/noticias/${id}`, { method: 'DELETE' })
-                    .then(response => response.json())
-                    .then(data => {
-                        if (data.success) {
-                            alert('Noticia eliminada correctamente');
-                            location.reload();
-                        } else {
-                            alert('Error al eliminar la noticia');
-                        }
-                    })
-                    .catch(error => console.error('Error al eliminar noticia:', error));
-            }
-        }
+      // Función para eliminar noticias
+function eliminarNoticia(id) {
+    if (confirm('¿Estás seguro de que quieres eliminar esta noticia?')) {
+        fetch(`/api/noticias/${id}`, { method: 'DELETE' })
+            .then(response => {
+                // Comprobar si la respuesta es JSON y manejar errores HTTP
+                if (!response.ok) {
+                    throw new Error('Error al procesar la solicitud');
+                }
+                return response.json();
+            })
+            .then(data => {
+                if (data.success) {
+                    alert(data.message); // Mensaje del backend
+                    location.reload(); // Recargar la página
+                } else {
+                    alert(data.message); // Mostrar el mensaje del backend
+                }
+            })
+            .catch(error => {
+                console.error('Error al eliminar noticia:', error);
+                alert('Ocurrió un error al eliminar la noticia');
+            });
+    }
+}
+
     </script>
 </body>
 </html>

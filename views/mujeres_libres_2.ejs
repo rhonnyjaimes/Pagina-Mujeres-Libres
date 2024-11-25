@@ -23,11 +23,21 @@
                 </div>
             </div>
             <ul class="nav__links" id="nav-links">
-                <li><a href="/mujeres_libres_2">Historia</a></li>
-                <li><a href="/registro" class="btn">Registrarse</a></li>
-                <li><a href="/login" class="btn">Iniciar Sesión</a></li>
-                <li><a href="/noticias" class="btn">Ver Noticias</a></li>
+                <li><a href="historia" class="btn">Historia</a></li>
+                
+                <% if (isAuthenticated) { %>
+                    <li id="logout-button"><a href="/logout" class="btn">Cerrar Sesión</a></li>
+                    <li id="user-info" class="btn">Bienvenido, <%= user.username %></li>
+            
+                    <% if (user.rol === 'admin') { %>
+                        <li><a href="/noticias" class="btn">Ver y Editar Noticias</a></li>
+                    <% } %>
+                <% } else { %>
+                    <li id="register-button"><a href="/registro" class="btn">Registrarse</a></li>
+                    <li id="login-button"><a href="/login" class="btn">Iniciar Sesión</a></li>
+                <% } %>
             </ul>
+            
         </nav>
         <div class="header__content">
             <h1>Impacto Social de las Mujeres Libres</h1>
@@ -107,7 +117,6 @@
             </div>
         </div>
     </section>
-
     <footer class="footer" id="news">
         <div class="section__container footer__container">
             <div class="footer__col">
@@ -130,10 +139,8 @@
             <div class="footer__col">
                 <h2>Únete a la red UVM</h2>
                 <p>Mantente al tanto de nuevas oportunidades y noticias para Mujeres Libres.</p>
-                <form action="/" method="POST">
-                    <input type="email" placeholder="Introduce tu email" aria-label="Introduce tu email para suscribirte" required />
-                    <button class="btn">Suscríbete</button>
-                </form>
+                <!-- Botón de registro -->
+                <a href="/registro" class="btn" style="margin-top: 10px;">¡Regístrate!</a>
             </div>
         </div>
     </footer>

@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Bienvenido</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            background-color: #f5f5f5;
+            margin: 0;
+        }
+        .welcome-container {
+            text-align: center;
+            padding: 20px;
+            border: 1px solid #ddd;
+            background: white;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+            border-radius: 8px;
+        }
+        h1 {
+            color: #e91e63;
+        }
+        p {
+            color: #555;
+        }
+    </style>
+    <script>
+        // Redirigir a la página principal después de 3 segundos
+        setTimeout(() => {
+            window.location.href = "<%= url %>";
+        }, 3000);
+    </script>
+</head>
+<body>
+    <div class="welcome-container">
+        <h1><%= mensaje %></h1>
+        <p><%= rol %></p>
+        <p>Serás redirigido a la página principal en unos momentos...</p>
+    </div>
+</body>
+</html>

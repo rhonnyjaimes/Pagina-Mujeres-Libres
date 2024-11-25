@@ -27,12 +27,21 @@
             </div>
         </div>
         <ul class="nav__links" id="nav-links">
-               
-                <li><a href="/logout" class="btn">Cerrar Sesión</a></li>
-                <li><a href="/registro" class="btn">Registrarse</a></li>
-                <li><a href="/login" class="btn">Iniciar Sesión</a></li>
-            <li><a href="/noticias" class="btn">Ver Noticias</a></li>
+            <li><a href="historia" class="btn">Historia</a></li>
+            
+            <% if (isAuthenticated) { %>
+                <li id="logout-button"><a href="/logout" class="btn">Cerrar Sesión</a></li>
+                <li id="user-info" class="btn">Bienvenido, <%= user.username %></li>
+        
+                <% if (user.rol === 'admin') { %>
+                    <li><a href="/noticias" class="btn">Ver y Editar Noticias</a></li>
+                <% } %>
+            <% } else { %>
+                <li id="register-button"><a href="/registro" class="btn">Registrarse</a></li>
+                <li id="login-button"><a href="/login" class="btn">Iniciar Sesión</a></li>
+            <% } %>
         </ul>
+        
     </nav>
     <div class="header__content">
         <h1>Mujeres Libres y Empoderadas</h1>
@@ -57,8 +66,9 @@
 <div class="noticias-destacadas">
     <h2>Noticias Destacadas</h2>
     <div id="noticias-recuadro">
-        <p>Cargando noticias...</p>
+        <p>No hay noticias recientes.</p>
     </div>
+    
 </div>
 <section class="section__container feature__container" id="story">
     <div class="feature__content">
@@ -118,9 +128,9 @@
                 <a href="#" class="logo">M<span>L</span></a>
             </div>
             <ul class="footer__links">
-                <li><a href="#"><span><i class="ri-phone-line"></i></span> +58 04123124895</a></li>
+                <li><a href="tel:+5804123124895"><span><i class="ri-phone-line"></i></span> +58 04123124895</a></li>
                 <li><a href="#"><span><i class="ri-map-pin-line"></i></span> Trujillo, Venezuela</a></li>
-                <li><a href="#"><span><i class="ri-mail-line"></i></span> mujereslibres@uvm.edu.ve</a></li>
+                <li><a href="mailto:mujereslibres@uvm.edu.ve"><span><i class="ri-mail-line"></i></span> mujereslibres@uvm.edu.ve</a></li>
             </ul>
         </div>
         <div class="footer__col">
@@ -132,55 +142,55 @@
         </div>
         <div class="footer__col">
             <h2>Únete a la red UVM</h2>
-            <p>Mantente al tanto de nuevas oportunidades para Mujeres Libres</p>
-            <form action="/">
-                <input type="email" placeholder="Introduce tu email" required />
-                <button class="btn">Suscríbete</button>
-            </form>
+            <p>Mantente al tanto de nuevas oportunidades y noticias para Mujeres Libres.</p>
+            <!-- Botón de registro -->
+            <a href="/registro" class="btn" style="margin-top: 10px;">¡Regístrate!</a>
         </div>
     </div>
 </footer>
-
 <script>
-    // Cargar y mostrar las noticias en la página principal
+   // Cargar noticias
+   
+    // Determinar si el usuario está autenticado (puedes establecer esta variable desde tu servidor)
+    const isAuthenticated = <%= isAuthenticated ? 'true' : 'false' %>;
+
+    // Cargar noticias
     fetch('/api/noticias')
         .then(response => response.json())
         .then(noticias => {
             const noticiasRecuadro = document.getElementById('noticias-recuadro');
-            noticiasRecuadro.innerHTML = ''; // Limpiar contenido previo
+            noticiasRecuadro.innerHTML = '';
 
-            // Función para truncar el texto del contenido
-            const truncarTexto = (texto, limite) => {
-                if (texto.length > limite) {
-                    return texto.substring(0, limite) + '...';
-                }
-                return texto;
-            };
-
-            // Iterar sobre las noticias para crear tarjetas con detalles básicos
-            noticias.forEach(noticia => {
-                const noticiaCard = document.createElement('div');
-                noticiaCard.classList.add('noticia-card');
-
-                // Crear la estructura de la tarjeta
-                noticiaCard.innerHTML = `
-                    <img src="/uploads/${noticia.imagen || 'default.jpg'}" alt="Imagen de ${noticia.titulo}" class="noticia-imagen">
-                    <div class="noticia-info">
-                        <h3 class="noticia-titulo">${noticia.titulo}</h3>
-                        <p class="noticia-contenido">${truncarTexto(noticia.contenido || 'Sin descripción disponible.', 100)}</p>
-                        <a href="/detalle-noticia?id=${noticia.id}" class="noticia-detalles-link">Leer más</a>
-                    </div>
-                `;
-
-                // Agregar la tarjeta al recuadro de noticias
-                noticiasRecuadro.appendChild(noticiaCard);
-            });
+            if (noticias.length === 0) {
+                noticiasRecuadro.innerHTML = '<p>No hay noticias recientes.</p>';
+            } else {
+                noticias.forEach(noticia => {
+                    const noticiaCard = document.createElement('div');
+                    noticiaCard.classList.add('noticia-card');
+                    noticiaCard.innerHTML = `
+                        <img src="/uploads/${noticia.imagen || 'default.jpg'}" alt="Imagen de ${noticia.titulo}" class="noticia-imagen">
+                        <div class="noticia-info">
+                            <h3 class="noticia-titulo">${noticia.titulo}</h3>
+                            <p>${noticia.contenido.substring(0, 100)}...</p>
+                            ${
+                                isAuthenticated
+                                    ? `<a href="/detalle-noticia?id=${noticia.id}" class="noticia-detalles-link">Leer más</a>`
+                                    : `<a href="/login" class="noticia-detalles-link">Inicia sesión para leer más</a>`
+                            }
+                        </div>`;
+                    noticiasRecuadro.appendChild(noticiaCard);
+                });
+            }
         })
-        .catch(error => {
-            console.error('Error al cargar las noticias:', error);
+        .catch(() => {
             document.getElementById('noticias-recuadro').innerHTML = '<p>Error al cargar las noticias. Intente más tarde.</p>';
         });
+
+
 </script>
+
+
+
 <script src="https://unpkg.com/scrollreveal"></script>
 <script src="main.js"></script>
 </body>
