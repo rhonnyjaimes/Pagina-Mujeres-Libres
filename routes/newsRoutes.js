@@ -7,12 +7,12 @@ const router = express.Router();
 const newsController = require('../controllers/newsController');
 const { verificarToken, requerirAdmin } = require('../middlewares/authMiddleware');
 // Ruta para ver el detalle de una noticia (requiere autenticación)
-router.get('/detalle-noticia', (req, res) => {
+router.get('/detalle-noticia',requerirAdmin, (req, res) => {
     res.sendFile(path.join(__dirname, '../views/detalle-noticia.html'));
 });
 
 // Ruta para obtener todas las noticias (requiere autenticación)
-router.get('/noticias',  (req, res) => {
+router.get('/noticias', requerirAdmin, (req, res) => {
     res.sendFile(path.join(__dirname, '../views', 'noticias.html'));
 });
 
