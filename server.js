@@ -41,7 +41,7 @@ app.get('/mujeres_libres_1', (req, res) => {
     res.sendFile(path.join(__dirname, 'views', 'mujeres_libres_1.html'));
 });
 
-app.get('/index', (req, res) => {
+app.get('/', (req, res) => {
     res.render('mujeres_libres_1'); // Renderiza la vista EJS
 });
 app.get('/historia', (req, res) => {
